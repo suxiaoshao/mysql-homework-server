@@ -6,9 +6,7 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class StationService {
-  constructor(
-    @InjectRepository(StationEntity) private stationRepository: Repository<StationEntity>
-  ) {}
+  constructor(@InjectRepository(StationEntity) private stationRepository: Repository<StationEntity>) {}
 
   async getAllStation(): Promise<StationEntity[]> {
     return await this.stationRepository.find();

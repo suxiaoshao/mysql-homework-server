@@ -5,8 +5,7 @@ import { TimesEntity } from '../../database/time.entity';
 
 @Injectable()
 export class TimesService {
-  constructor(@InjectRepository(TimesEntity) private timesRepository: Repository<TimesEntity>) {
-  }
+  constructor(@InjectRepository(TimesEntity) private timesRepository: Repository<TimesEntity>) {}
 
   async getTimesByDestinationStationId(destinationStationId: number): Promise<TimesEntity[]> {
     if (destinationStationId !== 0) {
