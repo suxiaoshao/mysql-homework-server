@@ -5,22 +5,22 @@ import { StationEntity } from './station.entity';
 
 @Entity('Travel_info')
 export class TravelInfoEntity {
-  @PrimaryColumn({ name: 'Order_id', length: 30 })
-  orderId: string;
-  @Column({ name: 'Ticket_type', length: 10, nullable: false })
-  ticketType: string;
+  @PrimaryColumn({ name: 'Order_id', length: 30, type: 'varchar' })
+  orderId: string | undefined;
+  @Column({ name: 'Ticket_type', length: 10, nullable: false, type: 'varchar' })
+  ticketType: string | undefined;
   @Column({ name: 'Ticket_price', type: 'float' })
-  ticketPrice: number;
+  ticketPrice: number | undefined;
   @ManyToOne(() => PassengerEntity, (passenger) => passenger.travelInfos)
   @JoinColumn({ name: 'Passenger_id' })
-  passenger: PassengerEntity;
+  passenger: PassengerEntity | undefined;
   @ManyToOne(() => TrainInfoEntity, (trainInfo) => trainInfo.travelInfos)
   @JoinColumn({ name: 'Train_id' })
-  trainInfo: TrainInfoEntity;
+  trainInfo: TrainInfoEntity | undefined;
   @ManyToOne(() => StationEntity, (station) => station.departureTravelInfos)
   @JoinColumn({ name: 'Departure_station_id' })
-  departureStation: StationEntity;
+  departureStation: StationEntity | undefined;
   @ManyToOne(() => StationEntity, (station) => station.arrivalTravelInfos)
   @JoinColumn({ name: 'Arrival_station_id' })
-  arrivalStation: StationEntity;
+  arrivalStation: StationEntity | undefined;
 }

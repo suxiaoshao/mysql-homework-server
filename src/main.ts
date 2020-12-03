@@ -1,5 +1,7 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { AppExceptionFilter } from './app-exception.filter';
+import { AdminGuard } from './common/guard/admin.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +14,8 @@ async function bootstrap() {
     credentials: true,
     optionsSuccessStatus: 204,
   });
+  app.useGlobalFilters(new AppExceptionFilter());
+  app.useGlobalGuards(new AdminGuard(new Reflector()));
   await app.listen(3000);
 }
 

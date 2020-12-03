@@ -5,32 +5,37 @@ import { TravelInfoEntity } from './travelInfo.entity';
 export class PassengerEntity {
   @PrimaryColumn({
     name: 'Passenger_id',
+    type: 'int',
   })
-  passengerId: number;
+  passengerId: number | undefined;
   @Column({
     length: 18,
     name: 'ID_number',
     nullable: false,
+    type: 'varchar',
   })
-  idNumber: string;
+  idNumber: string | undefined;
   @Column({
     length: 30,
     name: 'Passenger_name',
     nullable: false,
+    type: 'varchar',
   })
-  passengerName: string;
+  passengerName: string | undefined;
   @Column({
     length: 2,
     name: 'Gender',
     nullable: false,
+    type: 'varchar',
   })
-  gender: string;
+  gender: string | undefined;
   @Column({
     length: 11,
     name: 'Phone_number',
     nullable: false,
+    type: 'varchar',
   })
-  phoneNumber: string;
+  phoneNumber: string | undefined;
   @OneToMany(() => TravelInfoEntity, (travelInfo) => travelInfo.passenger)
-  travelInfos: TravelInfoEntity[];
+  travelInfos: TravelInfoEntity[] | undefined;
 }

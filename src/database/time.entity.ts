@@ -20,21 +20,21 @@ import { ViewColumn, ViewEntity } from 'typeorm';
 })
 export class TimesEntity {
   @ViewColumn()
-  trainId: number;
+  trainId: number | undefined;
   @ViewColumn()
-  destinationStationName: string;
+  destinationStationName: string | undefined;
   @ViewColumn()
-  startStationName: string;
+  startStationName: string | undefined;
   @ViewColumn()
-  arrivalTime: string;
+  arrivalTime: string | undefined;
   @ViewColumn()
-  departureTime: string;
+  departureTime: string | undefined;
   @ViewColumn()
-  ticketGate: string;
+  ticketGate: string | undefined;
   @ViewColumn()
-  status: string;
+  status: string | undefined;
   @ViewColumn()
-  startStationId: number;
+  startStationId: number | undefined;
   @ViewColumn()
-  destinationStationId: number;
+  destinationStationId: number | undefined;
 }

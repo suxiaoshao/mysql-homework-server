@@ -9,27 +9,29 @@ export class TrainInfoEntity {
     name: 'Train_id',
     length: 10,
   })
-  trainId: string;
+  trainId: string | undefined;
   @Column({
     length: 10,
     name: 'Train_type',
     nullable: false,
+    type: 'varchar',
   })
-  trainType: string;
+  trainType: string | undefined;
   @Column({
     length: 20,
     name: 'Model',
     nullable: true,
+    type: 'varchar',
   })
-  model: string;
+  model: string | undefined;
   @ManyToOne(() => StationEntity, (station) => station.startTrainInfos)
   @JoinColumn({ name: 'Start_station_id' })
-  startStation: StationEntity;
+  startStation: StationEntity | undefined;
   @ManyToOne(() => StationEntity, (station) => station.destinationTrainInfos)
   @JoinColumn({ name: 'Destination_station_id' })
-  destinationStation: StationEntity;
+  destinationStation: StationEntity | undefined;
   @OneToMany(() => TimeTableEntity, (timetable) => timetable.trainInfo)
-  timeTables: TimeTableEntity[];
+  timeTables: TimeTableEntity[] | undefined;
   @OneToMany(() => TravelInfoEntity, (travelInfo) => travelInfo.trainInfo)
-  travelInfos: TravelInfoEntity[];
+  travelInfos: TravelInfoEntity[] | undefined;
 }

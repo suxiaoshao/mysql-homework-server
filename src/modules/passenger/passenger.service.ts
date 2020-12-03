@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PassengerEntity } from '../../database/passenger.entity';
 import { Repository } from 'typeorm';
 import { TravelInfoEntity } from '../../database/travelInfo.entity';
 import { ResponseData } from '../../util/responseData';
+import { httpCode, MyException } from '../../app-exception.filter';
 
 @Injectable()
 export class PassengerService {
@@ -18,20 +19,28 @@ export class PassengerService {
       .leftJoinAndSelect('passenger.travelInfos', 'travelInfo')
       .whereInIds(passengerId)
       .getOne();
-    return {
-      code: 0,
-      data: await Promise.all(
-        (passenger?.travelInfos
-          ?.map<Promise<TravelInfoEntity | undefined>>(async (value) => this.getTravelInfoData(value.orderId))
-          ?.filter(async (value) => {
-            const thisValue = await value;
-            return thisValue !== undefined;
-          }) as Promise<TravelInfoEntity>[] | undefined) ?? [],
-      ),
-    };
+    if (passenger !== undefined && passenger.travelInfos) {
+      return {
+        code: 0,
+        data: await Promise.all(
+          (passenger.travelInfos
+            .map<Promise<TravelInfoEntity>>(async (value) => {
+              return (await this.getTravelInfoData(value.orderId)) as TravelInfoEntity;
+            })
+            .filter(async (value) => {
+              const thisValue = await value;
+              return thisValue !== undefined;
+            }) as Promise<TravelInfoEntity>[]) ?? [],
+        ),
+      };
+    }
+    throw new MyException(httpCode.noPassenger, HttpStatus.ACCEPTED);
   }
 
-  async getTravelInfoData(orderId: string): Promise<TravelInfoEntity | undefined> {
+  async getTravelInfoData(orderId: string | undefined): Promise<TravelInfoEntity | undefined> {
+    if (orderId === undefined) {
+      return undefined;
+    }
     return await this.travelInfoRepository
       .createQueryBuilder('travelInfo')
       .leftJoinAndSelect('travelInfo.departureStation', 'departureStation')

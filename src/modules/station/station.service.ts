@@ -3,6 +3,7 @@ import { StationEntity } from '../../database/station.entity';
 import { ResponseSuccessData } from '../../util/responseData';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { httpCode } from '../../app-exception.filter';
 
 @Injectable()
 export class StationService {
@@ -15,7 +16,7 @@ export class StationService {
   async getStation(): Promise<ResponseSuccessData<StationEntity[]>> {
     const data = await this.getAllStation();
     return {
-      code: 0,
+      code: httpCode.success,
       data: data,
     };
   }
