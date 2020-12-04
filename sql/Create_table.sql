@@ -64,7 +64,7 @@ create table Travel_info
 );
 
 
-# /*创建行程信息索引 */
-# create unique index oid on Travel_info (Order_id);
-# /*创建列车索引 */
-# create unique index tid on Train_info (Train_id);
+/*创建行程信息索引 */
+create unique index oid on Travel_info (Order_id);
+/*创建列车索引 */
+create unique index tid on Train_info (Train_id);

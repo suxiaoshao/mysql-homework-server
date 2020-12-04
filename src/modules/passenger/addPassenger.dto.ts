@@ -1,4 +1,4 @@
-import { IsInt, IsString, Length } from 'class-validator';
+import { IsInt, IsNumberString, IsString, Length } from 'class-validator';
 
 export class AddPassengerDto {
   @IsInt()
@@ -20,4 +20,10 @@ export class AddPassengerDto {
 export class DeletePassengerDto {
   @IsInt()
   passengerId: number;
+}
+
+export class SearchPassengerDto {
+  @IsString()
+  @IsNumberString()
+  passengerId: string;
 }
