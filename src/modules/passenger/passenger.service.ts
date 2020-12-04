@@ -50,4 +50,11 @@ export class PassengerService {
       .whereInIds(orderId)
       .getOne();
   }
+
+  async getALl() {
+    return {
+      code: httpCode.success,
+      data: await this.passengerRepository.find(),
+    };
+  }
 }

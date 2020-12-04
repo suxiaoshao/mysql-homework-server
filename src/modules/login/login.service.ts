@@ -17,7 +17,7 @@ export class LoginService {
       return {
         code: httpCode.success,
         data: {
-          token: sign({ username: userName, password: password }, jwtConstants.secret, {
+          token: sign({ userName: userName, password: password }, jwtConstants.secret, {
             expiresIn: jwtConstants.time,
           }),
         },

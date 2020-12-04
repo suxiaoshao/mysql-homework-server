@@ -10,8 +10,8 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
-    "incremental": true,
+    "incremental": true
     //    "strict":true,
-    "strictNullChecks": true
+    //    "strictNullChecks": true
   }
 }

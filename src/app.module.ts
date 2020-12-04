@@ -10,6 +10,8 @@ import { TimeTableEntity } from './database/timeTable.entity';
 import { TravelInfoEntity } from './database/travelInfo.entity';
 import { PassengerModule } from './modules/passenger/passenger.module';
 import { LoginModule } from './modules/login/login.module';
+import { TravelModule } from './modules/travel/travel.module';
+import { TrainModule } from './modules/train/train.module';
 
 @Module({
   imports: [
@@ -28,6 +30,8 @@ import { LoginModule } from './modules/login/login.module';
     TimeModule,
     PassengerModule,
     LoginModule,
+    TravelModule,
+    TrainModule,
   ],
 })
 export class AppModule {}

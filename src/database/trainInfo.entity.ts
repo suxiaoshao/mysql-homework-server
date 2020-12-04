@@ -24,10 +24,10 @@ export class TrainInfoEntity {
     type: 'varchar',
   })
   model: string | undefined;
-  @ManyToOne(() => StationEntity, (station) => station.startTrainInfos)
+  @ManyToOne(() => StationEntity, (station) => station.startTrainInfos, { cascade: true })
   @JoinColumn({ name: 'Start_station_id' })
   startStation: StationEntity | undefined;
-  @ManyToOne(() => StationEntity, (station) => station.destinationTrainInfos)
+  @ManyToOne(() => StationEntity, (station) => station.destinationTrainInfos, { cascade: true })
   @JoinColumn({ name: 'Destination_station_id' })
   destinationStation: StationEntity | undefined;
   @OneToMany(() => TimeTableEntity, (timetable) => timetable.trainInfo)

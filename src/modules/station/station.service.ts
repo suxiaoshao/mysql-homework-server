@@ -20,4 +20,28 @@ export class StationService {
       data: data,
     };
   }
+
+  async addStation(stationName: string, phoneNumber: string, stationId?: number) {
+    const newStation = this.stationRepository.create({
+      stationName: stationName,
+      phoneNumber: phoneNumber,
+      stationId: stationId,
+    });
+    const newData = await this.stationRepository.save(newStation);
+    return {
+      code: httpCode.success,
+      data: newData,
+    };
+  }
+
+  async deleteStation(stationId: number) {
+    const oldStation = this.stationRepository.create({
+      stationId: stationId,
+    });
+    await this.stationRepository.remove(oldStation);
+    return {
+      code: httpCode.success,
+      data: {},
+    };
+  }
 }
