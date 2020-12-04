@@ -57,4 +57,36 @@ export class PassengerService {
       data: await this.passengerRepository.find(),
     };
   }
+
+  async addPassenger(
+    passengerId: number,
+    idNumber: string,
+    passengerName: string,
+    gender: string,
+    phoneNumber: string,
+  ) {
+    const passenger = this.passengerRepository.create({
+      passengerId: passengerId,
+      idNumber: idNumber,
+      passengerName: passengerName,
+      gender: gender,
+      phoneNumber: phoneNumber,
+    });
+    const newData = await this.passengerRepository.save(passenger);
+    return {
+      code: httpCode.success,
+      data: newData,
+    };
+  }
+
+  async deletePassenger(passengerId: number) {
+    const passenger = this.passengerRepository.create({
+      passengerId: passengerId,
+    });
+    await this.passengerRepository.remove(passenger);
+    return {
+      code: httpCode.success,
+      data: {},
+    };
+  }
 }
